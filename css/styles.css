@@ -10,6 +10,9 @@
     --footer-icon-color: rgba(255, 255, 255, 0.1);
     --green-color: #31D0AA;
     --subtle-text-color: #8E8F99;
+    --modal-bg-color: #FCFCFC;
+    --transition-duration: 250ms;
+    --transition-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* =============== Dropping styles ================ */
@@ -47,7 +50,7 @@ button {
     cursor: pointer;
 }
 
-/* =============== Dropping styles ================ */
+/* =============== /Dropping styles ================ */
 
 /* =============== Componetns ===================== */
 
@@ -99,10 +102,10 @@ button {
     padding: 16px 32px;
     border: none;
     border-radius: 4px;
-
     margin-top: 48px;
-
     letter-spacing: 0.04em;
+    transition: background var(--transition-duration) var(--transition-function);
+
     background: var(--primary-brand-color);
     color: var(--white-color);
 }
@@ -119,6 +122,9 @@ button {
     color: var(--primary-brand-color);
     cursor: pointer;
     padding: 12px 24px;
+    transition: background var(--transition-duration) var(--transition-function),
+    color var(--transition-duration) var(--transition-function),
+    box-shadow var(--transition-duration) var(--transition-function);
 }
 
 .btn-filter:hover,
@@ -140,7 +146,7 @@ button {
     padding: 120px 0;
 }
 
-/* =============== Componetns ===================== */
+/* =============== /Componetns ===================== */
 
 /* ================== Logo ======================== */
 .logo {
@@ -162,21 +168,12 @@ button {
     color: var(--light-color);
 }
 
-/* Logo */
-
-.menu-link {     
-        font-weight: 500;
-        line-height: 1.5;
-        letter-spacing: 0.02em;
-        color: var(--dark-color);
-}
-
-/* ================== Logo ======================== */
+/* ================== /Logo ======================== */
 
 /* ================== Header ====================== */
 
 .page-header {
-    padding: 24px 0;
+    /* padding: 24px 0; */
     border-bottom: 1px solid #E7E9FC;
 }
 
@@ -205,9 +202,17 @@ button {
     margin-right: 46px;
 }
 
-/* ================== Header ====================== */
+/* ================== /Header ====================== */
 
 /* ============== Navigation Menu ================= */
+
+.menu-link {
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--dark-color);
+    transition: color var(--transition-duration) var(--transition-function);
+}
 
 .menu-link:hover,
 .menu-link:focus {
@@ -218,8 +223,8 @@ button {
         font-style: normal;
         line-height: 1.5;
         letter-spacing: 0.02em;
-        /* margin-right: 40px; */
         color: var(--text-color);
+        transition: var(--transition-duration) var(--transition-function);
 }
 
 .contact-info:not(:last-child) {
@@ -235,7 +240,29 @@ button {
     color: var(--pressed-color)
 }
 
-/* ============== Navigation Menu ================= */
+.menu-item {
+    position: relative;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.menu-item .current {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item .current::after {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--pressed-color);
+}
+
+/* ============== /Navigation Menu ================= */
 
 /* =================== Hero ======================= */
 
@@ -267,7 +294,7 @@ button {
         color: var(--white-color);
 }
 
-/* =================== Hero ======================= */
+/* =================== /Hero ======================= */
 
 /* ================== Our features ================ */
 
@@ -295,7 +322,7 @@ button {
     border-radius: 4px;
 }
 
-/* ================== Our features ================ */
+/* ================== /Our features ================ */
 
 /* ================== Activities ================== */
 
@@ -305,7 +332,7 @@ button {
     gap: 24px;
 }
 
-/* ================== Activities ================== */
+/* ================== /Activities ================== */
 
 /* ================= Our team ===================== */
 
@@ -344,6 +371,7 @@ button {
 
     background: var(--primary-brand-color);
     color: var(--light-color);
+    transition: background-color var(--transition-duration) var(--transition-function);
 }
 
 .social-list-link:hover,
@@ -351,7 +379,7 @@ button {
     background-color: var(--pressed-color);
 }
 
-/* ================= Our team ===================== */
+/* ================= /Our team ===================== */
 
 /* =================== Footer ===================== */
 
@@ -394,6 +422,7 @@ button {
      width: 40px;
      height: 40px;
     border-radius: 50%;
+    transition: background-color var(--transition-duration) var(--transition-function);
 
      background-color: var(--footer-icon-color);
      color: var(--light-color);
@@ -416,7 +445,7 @@ button {
     color: var(--white-color);
 }
 
-/* =================== Footer ===================== */
+/* =================== /Footer ===================== */
 
 /* ================= Portfolio ==================== */
 
@@ -443,7 +472,7 @@ button {
     box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08);
 }
 
-.project-card:hover {
+.project-card-link:hover {
     box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
 }
 
@@ -452,8 +481,39 @@ button {
     border: 1px solid var(--accent-color);
     border-top: none;
 }
+.project-card-link {
+    display: block;
+}
 
-/* ================= Portfolio ==================== */
+.project-img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    transform: translate(0, 100%);
+    transition: transform var(--transition-duration) var(--transition-function);
+
+    padding: 20px 32px;
+    line-height: 24px;
+    letter-spacing: 0.02em;
+    background-color: var(--primary-brand-color);
+    color: var(--light-color);
+}
+
+.project-card-link:hover .overlay,
+.project-card-link:focus .overlay {
+    transform: translate(0,0);
+}
+
+/* ================= /Portfolio ==================== */
 
 /* ================= Customers ==================== */
 
@@ -471,6 +531,8 @@ button {
     color: var(--subtle-text-color);
     border: 1px solid var(--subtle-text-color);
     border-radius: 5px;
+    transition: color var(--transition-duration) var(--transition-function),
+    border var(--transition-duration) var(--transition-function);
 }
 
 .customers-brend-link:hover,
@@ -483,4 +545,68 @@ button {
     fill:currentColor;
 }
 
-/* ================= Customers ==================== */
+/* ================= /Customers ==================== */
+
+/* ================ Modal Window ================== */
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 47, 66, 0.4);
+    transition: opacity var(--transition-duration) var(--transition-function),
+    visibility var(--transition-duration) var(--transition-function);
+}
+
+.backdrop.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 408px;
+    height: 576px;
+    border-radius: 4px;
+    background: var(--modal-bg-color);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    padding: 0;
+    background-color: var(--accent-color);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: background var(--transition-duration) var(--transition-function);
+}
+
+.modal-close-btn-icon {
+    fill: #000000;
+    transition: fill var(--transition-duration) var(--transition-function);
+}
+
+.modal-close-btn:hover,
+.modal-close-btn:focus {
+    background: var(--pressed-color);
+}
+
+.modal-close-btn:hover .modal-close-btn-icon,
+.modal-close-btn:focus .modal-close-btn-icon {
+    fill: var(--white-color);
+}
+/* ================ /Modal Window ================== */

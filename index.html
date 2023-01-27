@@ -59,7 +59,7 @@
       <section class="hero section bg-dark">
         <div class="container">
           <h1 class="hero-title">Effective Solutions for Your Business</h1>
-          <button class="btn" type="button">Order Service</button>
+          <button class="btn" type="button" data-modal-open>Order Service</button>
         </div>
       </section>
       <!-- Our features -->
@@ -409,5 +409,18 @@
         </div>
       </div>
     </footer>
+
+    <!-- Modal window -->
+
+    <div class="backdrop is-hidden" data-modal>
+      <div class="modal">
+        <button class="modal-close-btn" data-modal-close>
+          <svg class="modal-close-btn-icon" width="8" height="8" >
+            <use href="./images/sprite.svg#icon-close-black"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <script src="./js/modal.js"></script>
   </body>
 </html>
